@@ -11,7 +11,7 @@ struct AnimatedIcon: View {
     @Binding var showing: Bool
     @Binding var finished: Bool
     @State var current: String = "Milk"
-    @State var moving: Bool = false
+    @Binding var moving: Bool
     @State var incorrect = false
     @State var confirmedIncorrect = false
     @State var fadeOut = false
@@ -119,7 +119,7 @@ struct AnimPreview: View {
     var body: some View {
         ZStack {
 //            if (showing){
-            AnimatedIcon(showing: $showing, finished: $finished, moving: false)
+            AnimatedIcon(showing: $showing, finished: $finished, moving: .constant(false))
 //            }
             Button("Start") {
                 showing.toggle()

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ShoppingBasket: View {
-    var size = CGFloat(100.0)
+    var size = CGFloat(85.0)
     
     @State var animating = false
+    @State var needed = false
     @State var scale     = -1.0
     @State var plusIcon = true
 //    @Binding var shoppingAction: MethodHandler
@@ -30,12 +31,9 @@ struct ShoppingBasket: View {
                     .frame(width: size, height: size, alignment: .center)
                     .rotationEffect(.init(degrees: animating ? (30 * scale) : 0))
                     .scaleEffect(animating ? 1.1 : 1)
-                    .offset(x: geometry.size.width - size * 1.25, y: geometry.size.height - size * 1.25)
+                    .offset(x: geometry.size.width - size * (1.25), y: geometry.size.height - size * 1.25)
                     .animation(.spring(response: 1, dampingFraction: 0.4, blendDuration: 0.5))
                     .shadow(radius: 15)
-                    .onTapGesture {
-                        shopAction()
-                    }
                 
                 ZStack {
                     Circle()
@@ -50,7 +48,7 @@ struct ShoppingBasket: View {
                 .shadow(radius: 10)
                 .scaleEffect(plusIcon ? 1 : 1.25)
                 .opacity(plusIcon ? 0 : 1)
-                .offset(x: geometry.size.width - size * 1.55  - (!plusIcon ? size * 0.15 : 0), y: (geometry.size.height - size * 1.5) - (!plusIcon ? size * 0.3 : 0))
+                .offset(x: geometry.size.width - size * 0.70  - (!plusIcon ? size * 0.15 : 0), y: (geometry.size.height - size * 1.5) - (!plusIcon ? size * 0.3 : 0))
                 .animation(.spring(response: 1, dampingFraction: 0.6, blendDuration: 0.5))
                 
                 if(animating) {
@@ -68,9 +66,9 @@ struct ShoppingBasket: View {
                 }
             }
         }
-//        .onAppear {
-//            shoppingAction = shopAction
-//        }
+        .onAppear {
+            ScanManager.getInstance().shop_action = shopAction;
+        }
     }
 }
 

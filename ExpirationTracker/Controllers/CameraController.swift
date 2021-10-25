@@ -151,7 +151,7 @@ class CameraController: UIViewController, AVCaptureVideoDataOutputSampleBufferDe
                 if classifications.first!.confidence > 0.5 {
                     let identifier = classifications.first?.identifier ?? ""
                     
-                    if (identifier != "" && identifier != "Sour Cream") {
+                    if (identifier != "" && !ScanManager.getInstance().not_allowed.contains(identifier)) {
                         
                         var SecondaryOptions = [String]()
                         var fakeClassifications = classifications

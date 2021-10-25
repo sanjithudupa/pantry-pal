@@ -7,15 +7,20 @@
 
 import SwiftUI
 
-struct App: View {
-    var body: some View {
-        MainView()
-            .statusBar(hidden: true)
-    }
+enum AppPage {
+    case Home
+    case Camera
+    case GroceryList
 }
 
+final class AppEnvironmentData: ObservableObject {
+    @Published var currentPage : AppPage? = .Home
+}
+
+#if DEBUG
 struct App_Previews: PreviewProvider {
     static var previews: some View {
-        App()
+        HomeView().environmentObject(AppEnvironmentData())
     }
 }
+#endif

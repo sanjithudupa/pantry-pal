@@ -18,6 +18,9 @@ class ScanManager {
     var iterSinceLastVisible: Int = 0
     var toggleFlashlight: () -> Void = { }
     var capButtonPressed: Bool = false
+    var not_allowed: [String] = ["Sour Cream", "Papaya", "Passion Fruit", "Plum", "Pomegranate", "Ginger"]
+    var shop_action: MethodHandler = {}
+    var shoppingList: [FoodItem] = [FoodItem]()
     
     private static var instance: ScanManager? = nil
     
@@ -26,6 +29,12 @@ class ScanManager {
             instance = ScanManager()
         }
         return instance!
+    }
+    
+    public func registerItem() {
+        let item: FoodItem = FoodItem(_type: ScanManager.getInstance().selectedName)
+        
+        ScanManager.getInstance().shoppingList.append(item)
     }
     
     public static var CONFIDENCE_THRESHOLD = Float(0.675)
